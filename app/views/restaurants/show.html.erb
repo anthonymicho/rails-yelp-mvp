@@ -1,0 +1,45 @@
+<div class="container my-5">
+  <!-- Restaurant Details -->
+  <div class="card mb-5">
+    <div class="card-header bg-primary text-white text-center">
+      <h1 class="mb-0"><%= @restaurant.name %></h1>
+    </div>
+    <div class="card-body">
+      <h4 class="text-muted">Details</h4>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Address:</strong> <%= @restaurant.address %></li>
+        <li class="list-group-item"><strong>Phone Number:</strong> <%= @restaurant.phone_number %></li>
+        <li class="list-group-item"><strong>Category:</strong> <%= @restaurant.category %></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Reviews Section -->
+  <div class="card mb-5">
+    <div class="card-header bg-secondary text-white text-center">
+      <h2 class="mb-0">Reviews</h2>
+    </div>
+    <div class="card-body">
+      <% if @restaurant.reviews.any? %>
+        <% @restaurant.reviews.each do |review| %>
+          <div class="card mb-3">
+            <div class="card-body">
+              <p><strong>Rating:</strong> <%= "⭐️" * review.rating %>/5</p>
+              <p><strong>Content:</strong> <%= review.content %></p>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="text-muted text-center">No reviews yet for this restaurant.</p>
+      <% end %>
+    </div>
+    <div class="card-footer text-center">
+      <%= link_to "Add a Review", new_restaurant_review_path(@restaurant), class: "btn btn-success" %>
+    </div>
+  </div>
+
+  <!-- Back Button -->
+  <div class="text-center">
+    <%= link_to "Back to All Restaurants", root_path, class: "btn btn-primary" %>
+  </div>
+</div>
